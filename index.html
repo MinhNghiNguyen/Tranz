@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+<head>
+    
+    <!-- CSS -->
+    <style>
+        #signature-container {
+            display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center
+    }
+
+
+        #question10yes{
+        text-align: center;
+        }
+        .hidden{
+            display: none;
+        }
+        #tickbox{
+            text-align: center;
+        }
+        #fixed-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 5%;
+        width: 100%;
+        background-color: rgb(65, 51, 145);
+        color: rgb(51, 34, 148);
+        padding: 10px 20px;
+        box-shadow: 0 2px 5px rgba(41, 30, 105, 0.2);
+        z-index: 1000;
+    }
+    .headingquestion{
+        font-size: large;
+        color: rgb(74, 52, 173);
+    }
+    #container {
+        display: grid;
+        grid-template-columns: 1fr 2.5fr; /* Two equal columns */
+        gap: 10px; /* Gap between grid items */
+        padding-top: 4%; /* Adjust this value to give space for the fixed menu */
+    }
+    
+    #question {
+        padding: 10px;
+        border: 1px solid #ccc;
+        overflow: auto;
+    }
+    #doc{
+        padding: 10px;
+        border: 1px solid #ccc;
+        overflow: auto;
+    }
+    .typebox {
+        width: 100%;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    td, th {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    #signature-pad {
+        border: 1px solid #000;
+    }
+    #signature-container img {
+        margin-right: 10px; /* Adds space to the right of the image */
+    }
+
+    #signature-container span {
+        margin: 0 5px; /* Adds space on both sides of the span elements */
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
+</head>
+<body>
+<div id="fixed-menu">
+    </div>
+<div id="container">
+    <!-- 1sthalve -->
+<div id="question">
+<div id="question1">
+<p class="headingquestion">1. Tick the appropriate box indicating whether the certifier is the exporter, producer or importer (or exporter and producer).</p>
+<div id="tickbox">
+<input type="checkbox" id="tickbox1" name="question1" onclick="handleCheckbox(1)" class="typebox1">
+<label for="question1">Importer</label>
+<input type="checkbox" id="tickbox2" name="question2" onclick="handleCheckbox(2)" class="typebox1">
+<label for="question2">Exporter</label>
+<input type="checkbox" id="tickbox3" name="question3" onclick="handleCheckbox(3)" class="typebox1">
+<label for="question3">Producer</label></div>
+</div>
+<div id="question2" style="display: none;">
+    <p class="headingquestion">2. State the certifier’s name, address (including country), telephone number and email address.</p>
+    <p>Name: <input type="text" id="certifierName2" name="certifierName2" class="typebox"></p>
+    <p>Address: <input type="text" id="certifierAddress2" name="certifierAdress2" class="typebox"></p>
+    <p>Telephone Number: <input type="text" id="certifierTele2" name="certifierTele2" class="typebox"></p>
+    <p>Email Address: <input type="text" id="certifierEmail2" name="certifierEmail2" class="typebox"></p>
+</div>
+<div id="question3" class="hidden">
+    <p class="headingquestion">3. Provide the exporter’s name, address (including country), e-mail address and telephone number if different from the certifier. This information is not required if the producer is completing the certification of origin and does not know the identity of the exporter. The address of the exporter shall be the place of export of the good in a CPTPP country.</p>
+    <p>Name: <input type="text" id="certifierName3" name="certifierName3" class="typebox"></p>
+    <p>Address: <input type="text" id="certifierAddress3" name="certifierAdress3" class="typebox"></p>
+    <p>Telephone Number: <input type="text" id="certifierTele3" name="certifierTelephone3" class="typebox"></p>
+    <p>Email Address: <input type="text" id="certifierEmail3" name="certifierEmail3" class="typebox"></p>
+</div>
+<div id="question4" class="hidden">
+    <p class="headingquestion">4. Provide the producer’s name, address (including country), e-mail address and telephone number, if different from the certifier or exporter. If there are multiple producers, state “Various” or provide a list of producers. A person that wants this information to
+        remain confidential may state “Available upon request by the importing authorities”. The address of a producer shall be the place of production of the good in a CPTPP country.</p>
+        <p>Name: <input type="text" id="certifierName4" name="certifierName4" class="typebox"></p>
+        <p>Address: <input type="text" id="certifierAddress4" name="certifierAdress4" class="typebox"></p>
+        <p>Telephone Number: <input type="text" id="certifierTele4" name="certifierTele4" class="typebox"></p>
+        <p>Email Address: <input type="text" id="certifierEmail4" name="certifierEmail4" class="typebox"></p>
+</div>  
+<div id="question5" class="hidden">
+    <p class="headingquestion">5. Provide, if known, the importer’s name, address, e-mail address and telephone number. The address of the importer shall be in a CPTPP country. If the importer is not known, write “Not known”.</p>
+    <p>Name: <input type="text" id="certifierName5" name="certifierName5" class="typebox"></p>
+    <p>Address: <input type="text" id="certifierAddress5" name="certifierAdress5" class="typebox"></p>
+    <p>Telephone Number: <input type="text" id="certifierTele5" name="certifierTele5" class="typebox"></p>
+    <p>Email Address: <input type="text" id="certifierEmail5" name="certifierEmail5" class="typebox"></p>
+</div>  
+<div id="question6" class="hidden">
+    <p class="headingquestion">6. Provide the HS tariff classification of the good to the 6-digit level.</p>
+    <p><input type="text" id="sixnumid" name="sixnumid" class="typebox"></p>
+</div>
+<div id="question7" class="hidden">
+    <p class="headingquestion">7. Provide a description of the good. The description should be sufficient to identify the good covered by the certification.</p>
+    <p><input type="text" id="desc" name="desc" class="typebox"></p>
+</div>
+<div id="question8" class="hidden">
+    <p class="headingquestion">8. Specify the origin criteria under which the good qualifies (see table below).</p>    
+    <p><input type="text" id="tablequest" name="tablequest" class="typebox"></p>
+    <table>
+        <tr>
+            <td><b>Origin Criteria</b></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>The good is ‘wholly obtained or produced’ in the territory of one or more Parties in accordance with Article 3.3 (Wholly Obtained or Produced Goods).</td>
+            <td>WO</td>
+        </tr>
+        <tr>
+            <td>The good is produced entirely in the territory of one or more Parties, exclusively from originating materials in accordance with Article 3.2 (b) (Originating Goods)</td>
+            <td>PE</td>
+        </tr>
+        <tr>
+            <td>The good is produced in the territory of one or more of the Parties using non-originating materials provided the good satisfies the relevant Product Specific Rule of Origin in accordance with a Article 3.2 (c) (Originating Goods)</td>
+            <td>PSR</td>
+        </tr>
+    </table>
+
+</div>
+<div id="question9" class="hidden">
+    <p class="headingquestion">9. If it is a Certification of Origin covering a blanket period for multiple shipments of identical goods, state the period covered by the certification (max 12 months). If the Certification of Origin covers a single shipment of goods, indicate the invoice number related to the exportation (if known).</p>
+    <p><input type="text" id="certiquest" name="certiquest" class="typebox"></p>
+</div>
+<div id="question10" class="hidden">
+    <p class="headingquestion">10. The certifier must sign and date the certification.</p>
+    <div id="question10yes"><canvas id="signature-pad" width="300" height="200"></canvas>
+    <br>
+    <button id="save-signature">Save Signature</button>
+    <button id="clear-button">Clear</button>
+    <p><input type="date" id="birthdate" name="birthdate"></p></div>
+</div>
+</div>
+<!-- 2ndhalve -->
+<div id="doc">
+<table>
+        <tr>
+            <td>1. Certifier 
+                <br>
+                <input type="checkbox" id="tickbox1_set2" name="question1_set2" onclick="handleCheckboxSet2(1)" class="typebox2">
+                <label for="question1">Importer</label>
+                <input type="checkbox" id="tickbox2_set2" name="question2_set2" onclick="handleCheckboxSet2(2)" class="typebox2">
+                <label for="question2">Exporter</label>
+                <input type="checkbox" id="tickbox3_set2" name="question3_set2" onclick="handleCheckboxSet2(3)" class="typebox2">
+                <label for="question3">Producer</label>
+            </td>
+            <td>
+                CERTIFICATION OF ORIGIN <br>
+                Comprehensive and Progressive Agreement for Trans-Pacific Partnership
+            </td>
+        </tr>
+        <tr>
+            <td>2. Certifier’s details:
+                <p>Name: <span id="certifierNameOutput2"></span></p>
+                <p>Address: <span id="certifierAddressOutput2"></span></p>
+                <p>Telephone Number: <span id="certifierTeleOutput2"></span></p>
+                <p>Email address: <span id="certifierEmailOutput2"></span></p>
+            </td>
+            <td>3. Exporter details (if different from the certifier):
+                <p>Name: <span id="certifierNameOutput3"></span></p>
+                <p>Address: <span id="certifierAddressOutput3"></span></p>
+                <p>Telephone Number: <span id="certifierTeleOutput3"></span></p>
+                <p>Email address: <span id="certifierEmailOutput3"></span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Producer details (if different from the certifier or exporter):
+                <p>Name: <span id="certifierNameOutput4"></span></p>
+                <p>Address: <span id="certifierAddressOutput4"></span></p>
+                <p>Telephone Number: <span id="certifierTeleOutput4"></span></p>
+                <p>Email address: <span id="certifierEmailOutput4"></span></p>
+            </td>
+            <td>5. Importer details (if known):
+                <p>Name: <span id="certifierNameOutput5"></span></p>
+                <p>Address: <span id="certifierAddressOutput5"></span></p>
+                <p>Telephone Number: <span id="certifierTeleOutput5"></span></p>
+                <p>Email address: <span id="certifierEmailOutput5"></span></p>
+            </td>
+        </tr>
+     
+       </table>
+         <table>
+            <tr>
+            <td>6. HS Tariff Classification (6-digit level)
+            </td>
+            <td>7. Description of the Good
+            </td>
+            <td>Origin criterion
+                WO, PE, PSR</td>
+        </tr>
+        <tr>
+            <td><span id="sixnumidoutput"></span></td>
+            <td><span id="descoutput"></span></td>
+            <td><span id="tablequestoutput"></span></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>9. Period covered by certification
+                (if applicable) or invoice number
+                (if relevant and if known)</td>
+            <td>
+                <p><span id="certiquestoutput"></span></p>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td id="its142rnandicantthinkofaname">
+                <p>10. Certification (signed by the certifier listed above):
+                    I certify that the goods described in this document qualify as originating and the information contained in this document is true and accurate. |
+                    
+                    assume responsibility for proving such representations and agree to maintain and present upon request or to make available during a verification
+                    visit, documentation necessary to support this certification.</p>
+                <div id="signature-container">
+                <span>Signature:</span>
+                <img id="signatureImage" src="" alt="Signature">
+                <span> Date:</span>
+                <span id="display-date"></span>
+                </div>
+                
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+<!-- JAVASCRIPT -->
+<script>
+
+
+document.getElementById('clear-button').addEventListener('click', function() {
+    signaturePad.clear();
+});
+// question2
+const certifierNameInput2 = document.getElementById('certifierName2');
+const certifierNameOutput2 = document.getElementById('certifierNameOutput2');
+    
+certifierNameInput2.addEventListener('input', function() {
+    certifierNameOutput2.textContent = certifierNameInput2.value;
+    });
+
+const certifierAddressInput2 = document.getElementById('certifierAddress2');
+const certifierAddressOutput2 = document.getElementById('certifierAddressOutput2');
+certifierAddressInput2.addEventListener('input', function() {
+    certifierAddressOutput2.textContent = certifierAddressInput2.value;
+    });
+
+const certifierTeleInput2 = document.getElementById('certifierTele2');
+const certifierTeleOutput2 = document.getElementById('certifierTeleOutput2');
+certifierTeleInput2.addEventListener('input', function() {
+    certifierTeleOutput2.textContent = certifierTeleInput2.value;
+    });
+
+const certifierEmailInput2 = document.getElementById('certifierEmail2');
+const certifierEmailOutput2 = document.getElementById('certifierEmailOutput2');
+certifierEmailInput2.addEventListener('input', function() {
+    certifierEmailOutput2.textContent = certifierEmailInput2.value;
+    });
+
+// question3
+const certifierNameInput3 = document.getElementById('certifierName3');
+const certifierNameOutput3 = document.getElementById('certifierNameOutput3');
+    
+certifierNameInput3.addEventListener('input', function() {
+    certifierNameOutput3.textContent = certifierNameInput3.value;
+    });
+
+const certifierAddressInput3 = document.getElementById('certifierAddress3');
+const certifierAddressOutput3 = document.getElementById('certifierAddressOutput3');
+certifierAddressInput3.addEventListener('input', function() {
+    certifierAddressOutput3.textContent = certifierAddressInput3.value;
+    });
+
+const certifierTeleInput3 = document.getElementById('certifierTele3');
+const certifierTeleOutput3 = document.getElementById('certifierTeleOutput3');
+certifierTeleInput3.addEventListener('input', function() {
+    certifierTeleOutput3.textContent = certifierTeleInput3.value;
+    });
+
+const certifierEmailInput3 = document.getElementById('certifierEmail3');
+const certifierEmailOutput3= document.getElementById('certifierEmailOutput3');
+certifierEmailInput3.addEventListener('input', function() {
+    certifierEmailOutput3.textContent = certifierEmailInput3.value;
+    });
+// question4
+const certifierNameInput4 = document.getElementById('certifierName4');
+const certifierNameOutput4 = document.getElementById('certifierNameOutput4');
+    
+certifierNameInput4.addEventListener('input', function() {
+    certifierNameOutput4.textContent = certifierNameInput4.value;
+    });
+
+const certifierAddressInput4 = document.getElementById('certifierAddress4');
+const certifierAddressOutput4 = document.getElementById('certifierAddressOutput4');
+certifierAddressInput4.addEventListener('input', function() {
+    certifierAddressOutput4.textContent = certifierAddressInput4.value;
+    });
+
+const certifierTeleInput4 = document.getElementById('certifierTele4');
+const certifierTeleOutput4 = document.getElementById('certifierTeleOutput4');
+certifierTeleInput4.addEventListener('input', function() {
+    certifierTeleOutput4.textContent = certifierTeleInput4.value;
+    });
+
+const certifierEmailInput4 = document.getElementById('certifierEmail4');
+const certifierEmailOutput4= document.getElementById('certifierEmailOutput4');
+certifierEmailInput4.addEventListener('input', function() {
+    certifierEmailOutput4.textContent = certifierEmailInput4.value;
+    });
+// question5
+const certifierNameInput5 = document.getElementById('certifierName5');
+const certifierNameOutput5 = document.getElementById('certifierNameOutput5');
+    
+certifierNameInput5.addEventListener('input', function() {
+    certifierNameOutput5.textContent = certifierNameInput5.value;
+    });
+
+const certifierAddressInput5 = document.getElementById('certifierAddress5');
+const certifierAddressOutput5 = document.getElementById('certifierAddressOutput5');
+certifierAddressInput5.addEventListener('input', function() {
+    certifierAddressOutput5.textContent = certifierAddressInput5.value;
+    });
+
+const certifierTeleInput5 = document.getElementById('certifierTele5');
+const certifierTeleOutput5 = document.getElementById('certifierTeleOutput5');
+certifierTeleInput5.addEventListener('input', function() {
+    certifierTeleOutput5.textContent = certifierTeleInput5.value;
+    });
+
+const certifierEmailInput5 = document.getElementById('certifierEmail5');
+const certifierEmailOutput5= document.getElementById('certifierEmailOutput5');
+certifierEmailInput5.addEventListener('input', function() {
+    certifierEmailOutput5.textContent = certifierEmailInput5.value;
+    });
+// question6
+document.getElementById("sixnumid").addEventListener("input",function(){
+    document.getElementById("sixnumidoutput").textContent = document.getElementById("sixnumid").value})
+// question7
+document.getElementById("desc").addEventListener("input",function(){
+    document.getElementById("descoutput").textContent = document.getElementById("desc").value})
+// question8
+document.getElementById("tablequest").addEventListener("input",function(){
+    document.getElementById("tablequestoutput").textContent = document.getElementById("tablequest").value})
+// question9
+document.getElementById("certiquest").addEventListener("input",function(){
+    document.getElementById("certiquestoutput").textContent = document.getElementById("certiquest").value
+})
+// question10
+const signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+        const saveButton = document.getElementById('save-signature');
+        const clearButton = document.getElementById('clear-button');
+        const signatureImage = document.getElementById('signatureImage');
+
+        saveButton.addEventListener('click', function() {
+            if (signaturePad.isEmpty()) {
+                alert('Please provide a signature first.');
+            } else {
+                const signatureDataURL = signaturePad.toDataURL();
+                signatureImage.src = signatureDataURL;
+            }
+        });
+
+        clearButton.addEventListener('click', function() {
+            signaturePad.clear();
+            signatureImage.src = "";
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const birthdateInput = document.getElementById('birthdate');
+            const displayDate = document.getElementById('display-date');
+
+            birthdateInput.addEventListener('change', function() {
+                displayDate.textContent = birthdateInput.value;
+            });
+        });
+
+        let currentQuestion = 1;
+
+function showNextQuestion() {
+    currentQuestion++;
+    const nextQuestion = document.getElementById(`question${currentQuestion}`);
+    
+    if (nextQuestion) {
+        nextQuestion.style.display = 'block';
+        // Remove event listeners after showing the next question
+        document.getElementById('tickbox1').removeEventListener('change', showNextQuestion);
+        document.getElementById('tickbox2').removeEventListener('change', showNextQuestion);
+        document.getElementById('tickbox3').removeEventListener('change', showNextQuestion);
+    }
+}
+
+if (currentQuestion === 1) {
+    document.getElementById('tickbox1').addEventListener('change', showNextQuestion);
+    document.getElementById('tickbox2').addEventListener('change', showNextQuestion);
+    document.getElementById('tickbox3').addEventListener('change', showNextQuestion);
+}
+
+const question3 = document.getElementById('question3');
+const question4 = document.getElementById('question4');
+const question5 = document.getElementById('question5');
+const question6 = document.getElementById('question6');
+const question7 = document.getElementById('question7');
+const question8 = document.getElementById('question8');
+const question9 = document.getElementById('question9');
+const question10 = document.getElementById('question10');
+
+const certifierName2 = document.getElementById('certifierName2');
+const certifierAddress2 = document.getElementById('certifierAddress2');
+const certifierTele2 = document.getElementById('certifierTele2');
+const certifierEmail2 = document.getElementById('certifierEmail2');
+
+
+    [certifierName2, certifierAddress2, certifierTele2, certifierEmail2].forEach(input => {
+        input.addEventListener('input', function() {
+            if (certifierName2.value && certifierAddress2.value && certifierTele2.value && certifierEmail2.value) {
+                question3.classList.remove('hidden');
+            } else {
+                question3.classList.add('hidden');
+            }
+        });
+    });
+
+const certifierName3 = document.getElementById('certifierName3');
+const certifierAddress3 = document.getElementById('certifierAddress3');
+const certifierTele3 = document.getElementById('certifierTele3');
+const certifierEmail3 = document.getElementById('certifierEmail3');
+
+
+    [certifierName3, certifierAddress3, certifierTele3, certifierEmail3].forEach(input => {
+        input.addEventListener('input', function() {
+            if (certifierName3.value && certifierAddress3.value && certifierTele3.value && certifierEmail3.value) {
+                question4.classList.remove('hidden');
+            } else {
+                question4.classList.add('hidden');
+            }
+        });
+    });
+
+const certifierName4 = document.getElementById('certifierName4');
+const certifierAddress4 = document.getElementById('certifierAddress4');
+const certifierTele4 = document.getElementById('certifierTele4');
+const certifierEmail4 = document.getElementById('certifierEmail4');
+
+
+    [certifierName4, certifierAddress4, certifierTele4, certifierEmail4].forEach(input => {
+        input.addEventListener('input', function() {
+            if (certifierName4.value && certifierAddress4.value && certifierTele4.value && certifierEmail4.value) {
+                question5.classList.remove('hidden');
+            } else {
+                question5.classList.add('hidden');
+            }
+        });
+    });
+
+const certifierName5 = document.getElementById('certifierName5');
+const certifierAddress5 = document.getElementById('certifierAddress5');
+const certifierTele5 = document.getElementById('certifierTele5');
+const certifierEmail5 = document.getElementById('certifierEmail5');
+
+
+    [certifierName5, certifierAddress5, certifierTele5, certifierEmail5].forEach(input => {
+        input.addEventListener('input', function() {
+            if (certifierName5.value && certifierAddress5.value && certifierTele5.value && certifierEmail5.value) {
+                question6.classList.remove('hidden');
+            } else {
+                question6.classList.add('hidden');
+            }
+        });
+    });
+document.getElementById("sixnumid").addEventListener("input",function(){ if (certifierName5.value && certifierAddress5.value && certifierTele5.value && certifierEmail5.value) {
+                question7.classList.remove('hidden');
+            } else {
+                question7.classList.add('hidden');
+            }
+        });
+document.getElementById("desc").addEventListener("input",function(){ if (certifierName5.value && certifierAddress5.value && certifierTele5.value && certifierEmail5.value) {
+                question8.classList.remove('hidden');
+            } else {
+                question8.classList.add('hidden');
+            }
+        });
+document.getElementById("tablequest").addEventListener("input",function(){ if (certifierName5.value && certifierAddress5.value && certifierTele5.value && certifierEmail5.value) {
+                question9.classList.remove('hidden');
+            } else {
+                question9.classList.add('hidden');
+            }
+        });
+document.getElementById("certiquest").addEventListener("input",function(){ if (certifierName5.value && certifierAddress5.value && certifierTele5.value && certifierEmail5.value) {
+                question10.classList.remove('hidden');
+            } else {
+                question10.classList.add('hidden');
+            }
+        });
+
+        function handleCheckbox(checkboxNum) {
+        var checkboxes = document.querySelectorAll('input[class="typebox1"]');
+        checkboxes.forEach(function(checkbox, index) {
+            if (index + 1 !== checkboxNum) {
+                checkbox.checked = false;
+            }
+        });
+    }
+function handleCheckbox1(checkboxNum) {
+    const checked = document.getElementById(`tickbox${checkboxNum}`).checked;
+    
+    const checkboxes_set2 = document.querySelectorAll('.typebox2');
+    checkboxes_set2[checkboxNum - 1].checked = checked;
+}
+
+function handleCheckboxSet2(checkboxNum) {
+    const checked = document.getElementById(`tickbox${checkboxNum}_set2`).checked;
+    
+    const checkboxes = document.querySelectorAll('.typebox1');
+    checkboxes[checkboxNum - 1].checked = checked;
+}
+</script>
+</body>
